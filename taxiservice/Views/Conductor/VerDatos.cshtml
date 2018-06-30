@@ -1,0 +1,36 @@
+﻿@model List<taxiservice.Models.Conductor>
+
+@{
+	 ViewBag.Title = "Lista de Conductores";
+}
+
+<h2>@ViewBag.Title</h2>
+<ul class="nav navbar-nav">
+   <li>@Html.ActionLink("Agregar", "Agregar", "Conductor")</li>
+   <li>@Html.ActionLink("Buscar", "Buscar", "Conductor")</li>
+   <li>@Html.ActionLink("Editar", "Editar", "Conductor")</li>
+   <li>@Html.ActionLink("Listar", "VerDatos", "Conductor")</li>
+</ul>
+<hr />
+<table class="table table-striped">
+	 <thead>
+			<tr>
+				 <th>ID</th>
+				 <th>TDoc.</th>
+				 <th>NDoc</th>
+				 <th>Nombre</th>
+			</tr>
+	 </thead>
+	 <tbody>
+			@foreach (var item in Model)
+			{
+				 <tr>
+						<td>@item.Id</td>
+						<td>@item.TDocumento</td>
+						<td>@item.NDocumento</td>
+						<td>@item.Nombre</td>
+				 </tr>
+			}
+	 </tbody>
+</table>
+Se encontraron @Model.Count registros
