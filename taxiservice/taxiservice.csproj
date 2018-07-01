@@ -178,8 +178,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Automovil.cs" />
+    <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Conductor.cs" />
+    <Compile Include="Models\Marca.cs" />
+    <Compile Include="Models\Modeo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Automoviles.cs" />
+    <Compile Include="Services\Clientes.cs" />
     <Compile Include="Services\Conductores.cs" />
     <Compile Include="Services\Conexion.cs" />
     <Compile Include="Startup.cs" />

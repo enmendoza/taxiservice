@@ -9,29 +9,29 @@ using System.Data;
 
 namespace taxiservice.Services
 {
-	public class Conductores
+	public class Clientes
 	{
 		private Conexion m_conn;
 		private NpgsqlDataReader m_data;
-		private List<Conductor> m_conductores;
+		private List<Cliente> m_lista;
 
-		public Conductores()
+		public Clientes()
 		{
 			m_conn = new Conexion();
 			m_data = null;
-			m_conductores = new List<Conductor>();
+			m_lista = new List<Cliente>();
 		}
 		/// <summary>
-		/// Crea un Objeto Conductor
+		/// Crea un Objeto Cliente
 		/// </summary>
 		/// <param name="lData">Es un objeto NpgsqlDataReader que contiene datos para crear el objeto</param>
-		/// <returns>Devuelve un Objeto de tipo Conductor</returns>
-		private Conductor crearObjeto(NpgsqlDataReader lData)
+		/// <returns>Devuelve un Objeto de tipo Cliente</returns>
+		private Cliente crearObjeto(NpgsqlDataReader lData)
 		{
-			Conductor lObjeto = null;
+			Cliente lObjeto = null;
 			if (lData != null)
 			{
-				lObjeto = new Conductor();
+				lObjeto = new Cliente();
 				lObjeto.Id = Convert.ToInt32(lData["idconductor"]);
 				lObjeto.TDocumento = Convert.ToString(lData["tdoc"]);
 				lObjeto.NDocumento = Convert.ToString(lData["ndoc"]);
@@ -43,14 +43,14 @@ namespace taxiservice.Services
 			return lObjeto;
 		}
 		/// <summary>
-		/// Devuelve un Objeto Conductor
+		/// Devuelve un Objeto Cliente
 		/// </summary>
-		/// <param name="pID">Es el id que identifica a un registro en la tabla conductor</param>
-		/// <returns>Devuelve un Objeto de tipo Conductor</returns>
-		public Conductor getConductor(int pID)
+		/// <param name="pID">Es el id que identifica a un registro en la tabla Cliente</param>
+		/// <returns>Devuelve un Objeto de tipo Cliente</returns>
+		public Cliente getConductor(int pID)
 		{
-			Conductor lObjeto = null;
-			if (buscar("*","where idconductor=" + pID))
+			Cliente lObjeto = null;
+			if (buscar("*", "where idconductor=" + pID))
 			{
 				lObjeto = crearObjeto(m_data);
 			}
@@ -60,12 +60,12 @@ namespace taxiservice.Services
 		/// Crea una lista de Conductores
 		/// </summary>
 		/// <returns>Devuelve una lista de conductores</returns>
-		public List<Conductor> getData()
+		public List<Cliente> getData()
 		{
-			return m_conductores;
+			return m_lista;
 		}
 		/// <summary>
-		/// Busca en la tabla conductor segun los parametros especificados
+		/// Busca en la tabla Cliente segun los parametros especificados
 		/// </summary>
 		/// <param name="pCampos">Indica los campos a devolver cuando se ejecuta la búsqueda</param>
 		/// <param name="pFiltro">Es el filtro que se aplicara al realizar la búsqueda</param>
@@ -85,7 +85,7 @@ namespace taxiservice.Services
 					m_data = lCmd.ExecuteReader();
 					while (m_data.Read())
 					{
-						m_conductores.Add(crearObjeto(m_data));
+						m_lista.Add(crearObjeto(m_data));
 					}
 					lRsp = (m_data != null);
 				}
@@ -102,13 +102,13 @@ namespace taxiservice.Services
 			return lRsp;
 		}
 		/// <summary>
-		/// Guarda/Actualiza un registro de conductor
+		/// Guarda/Actualiza un registro de Cliente
 		/// </summary>
-		/// <param name="pObjeto">Objeto tipo Conductor</param>
+		/// <param name="pObjeto">Objeto tipo Cliente</param>
 		/// <param name="pOpc">Parametro que indica si se crear un nuevo registro (INS),
 		/// o si se va a actualizar un registro (UPD)</param>
 		/// <returns>Entero que es el Id en la tabla de conductores</returns>
-		public int guardar(Conductor pObjeto, string pOpc)
+		public int guardar(Cliente pObjeto, string pOpc)
 		{
 			int lNuevoId = 0;
 			try
@@ -138,8 +138,8 @@ namespace taxiservice.Services
 					{
 						if (lDrd != null)
 						{
-								lDrd.Read();
-								lNuevoId = Convert.ToInt32(lDrd[0]);
+							lDrd.Read();
+							lNuevoId = Convert.ToInt32(lDrd[0]);
 						}
 					}
 				}
